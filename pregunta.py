@@ -7,6 +7,8 @@ cuenta que los nombres de las columnas deben ser en minusculas, reemplazando los
 por guiones bajos; y que las palabras clave deben estar separadas por coma y con un solo 
 espacio entre palabra y palabra.
 
+Elaborado por: Catalina Restrepo Salgado
+
 
 """
 
@@ -52,10 +54,12 @@ def ingest_data():
                 data["cantidad_de_palabras_clave"].append(int(lines[i][1]))
                 data["porcentaje_de_palabras_clave"].append(float(lines[i][2][:-2].replace(",", ".")))
                 data["principales_palabras_clave"].append(" ".join(lines[i][3:]))
+            
             # De lo contrario, se continúa con las palabras clave de la fila anterior
             elif data["principales_palabras_clave"]:
                 line = data["principales_palabras_clave"].pop() + " " + " ".join(lines[i])                
                 data["principales_palabras_clave"].append(line.strip())
 
         df = pd.DataFrame(data)
+
         return df
